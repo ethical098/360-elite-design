@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="360 Elite Design - Freelance Creative Services | Logo Design, Website Development, SEO, Mobile Apps, Ecommerce & Game Development">
+    <title>360 Elite Design | Where Strategy Meets Execution</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+
+        :root {
+            --tw-color-primary: #1e40af;
+        }
+
+        * {
+            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, transform, opacity;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .tail-container * {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+
+        .heading-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+        }
+
+        /* Advanced CSS Animations - Enhanced from Tallium-style */
+
+        /* Logo floating with gentle rotation */
+        .logo-spin {
+            animation: logoFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-18px) rotate(8deg);
+            }
+        }
+
+        /* Hero title reveal with stagger */
+        .hero-title {
+            animation: titleReveal 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+        }
+
+        @keyframes titleReveal {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Service cards entrance with stagger delay */
+        .service-card {
+            opacity: 0;
+            transform: translateY(60px);
+            animation: cardPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes cardPop {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Portfolio hover tilt + shine effect */
+        .portfolio-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-card::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 50%;
+            height: 200%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255,255,255,0.4),
+                transparent
+            );
+            transform: skewX(-25deg);
+            animation: shine 4s infinite;
+            opacity: 0;
+        }
+
+        .portfolio-card:hover::before {
+            animation: shine 1.2s linear;
+            opacity: 1;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-120%) skewX(-25deg); }
+            20% { transform: translateX(200%) skewX(-25deg); }
+            100% { transform: translateX(200%) skewX(-25deg); }
+        }
+
+        /* Scroll-triggered fade-in-up with IntersectionObserver */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Parallax-like hero background subtle movement */
+        .hero-bg {
+            background-attachment: fixed;
+            animation: subtleParallax 30s linear infinite alternate;
+        }
+
+        @keyframes subtleParallax {
+            from { background-position: 0% 50%; }
+            to { background-position: 100% 50%; }
+        }
+
+        /* Button pulse glow */
+        .pulse-glow {
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                box-shadow: 0 0 15px -5px rgb(30 64 175);
+            }
+            50% {
+                box-shadow: 0 0 35px 10px rgb(59 130 246);
+            }
+        }
+
+        /* Text gradient shift animation */
+        .gradient-shift {
+            background: linear-gradient(90deg, #1e40af, #60a5fa, #1e40af);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientMove 6s linear infinite;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Modal entrance with scale + fade */
+        .modal {
+            animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes modalPop {
+            from {
+                opacity: 0;
+                transform: scale(0.7) translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Navigation link underline draw */
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2.5px;
+            bottom: -4px;
+            left: 0;
+            background: linear-gradient(to right, #1e40af, #60a5fa);
+            transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        /* Staggered service icons on hover */
+        .service-icon {
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.25) rotate(12deg);
+        }
+    </style>
+</head>
+<body class="tail-container overflow-x-hidden">
+    <!-- HEADER / NAVIGATION -->
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm backdrop-blur-lg">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between h-20">
+
+                <!-- Enhanced Logo with advanced float -->
+                <div class="flex items-center gap-x-3 group">
+                    <svg id="custom-logo" width="72" height="72" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-spin drop-shadow-xl">
+                        <circle cx="34" cy="34" r="32" stroke="#111827" stroke-width="5" stroke-dasharray="4 2"/>
+                        <circle cx="34" cy="34" r="26" fill="#1e40af"/>
+
+                        <!-- Icons inside -->
+                        <text x="19" y="27" font-size="14" fill="#fff" font-weight="800">$</text>
+                        <rect x="42" y="19" width="11" height="19" rx="2" fill="#fff"/>
+                        <circle cx="24" cy="47" r="7.5" stroke="#fff" stroke-width="2.2" fill="none"/>
+                        <rect x="41" y="42" width="14" height="19" rx="3" fill="none" stroke="#fff" stroke-width="2"/>
+                    </svg>
+                    <div class="group-hover:scale-105">
+                        <span class="text-3xl font-semibold tracking-[-2px] heading-font gradient-shift">360 Elite Design</span>
+                        <p class="text-xs text-gray-500 -mt-1.5 tracking-widest">by Coedell</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation with draw animation -->
+                <div class="hidden md:flex items-center gap-x-9 text-base font-medium text-gray-700">
+                    <a href="#home" onclick="smoothScrollTo('home')" class="nav-link py-2">Home</a>
+                    <a href="#about" onclick="smoothScrollTo('about')" class="nav-link py-2">About</a>
+                    <a href="#services" onclick="smoothScrollTo('services')" class="nav-link py-2">Services</a>
+                    <a href="#portfolio" onclick="smoothScrollTo('portfolio')" class="nav-link py-2">Portfolio</a>
+                    <a href="#contact" onclick="smoothScrollTo('contact')" class="nav-link py-2">Contact</a>
+                </div>
+
+                <!-- Action Buttons with pulse glow -->
+                <div class="flex items-center gap-x-4">
+                    <button onclick="showProposalModal()"
+                            class="px-7 py-3 text-sm font-semibold rounded-3xl border border-gray-300 hover:border-[#1e40af] hover:text-[#1e40af] flex items-center gap-x-2 group">
+                        <i class="fa-solid fa-file-lines group-active:rotate-12"></i>
+                        <span>Get Proposal</span>
+                    </button>
+
+                    <button onclick="showAppointmentModal()"
+                            class="px-7 py-3 text-sm font-semibold rounded-3xl bg-[#1e40af] text-white flex items-center gap-x-2 shadow-xl pulse-glow">
+                        <i class="fa-solid fa-calendar"></i>
+                        <span>Book Meeting</span>
+                    </button>
+
+                    <button onclick="toggleMobileMenu()" class="md:hidden text-3xl text-gray-700">
+                        <i class="fa-solid fa-bars" id="mobile-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu with slide animation -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t px-6 py-6 animate-[slideDown_0.4s_ease-out]">
+            <div class="flex flex-col gap-y-5 text-lg font-medium">
+                <a href="#home" onclick="smoothScrollTo('home');toggleMobileMenu()" class="py-3">Home</a>
+                <a href="#about" onclick="smoothScrollTo('about');toggleMobileMenu()" class="py-3">About Us</a>
+                <a href="#services" onclick="smoothScrollTo('services');toggleMobileMenu()" class="py-3">Services</a>
+                <a href="#portfolio" onclick="smoothScrollTo('portfolio');toggleMobileMenu()" class="py-3">Portfolio</a>
+                <a href="#contact" onclick="smoothScrollTo('contact');toggleMobileMenu()" class="py-3">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO BANNER with advanced animations -->
+    <section id="home" class="hero-bg text-white min-h-screen flex items-center relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center pt-20">
+            <div class="space-y-10">
+                <div class="inline-flex items-center gap-x-3 bg-white/20 backdrop-blur-2xl px-6 py-3 rounded-3xl border border-white/30 text-sm font-medium">
+                    <div class="w-3 h-3 bg-emerald-400 rounded-full animate-ping"></div>
+                    OPEN FOR FREELANCE PROJECTS 2026
+                </div>
+
+                <h1 class="text-6xl md:text-[4.2rem] leading-none font-semibold heading-font tracking-tighter hero-title">
+                    Where Strategy<br><span class="gradient-shift">Meets Execution</span>
+                </h1>
+
+                <p class="text-2xl text-blue-100 max-w-md animate-on-scroll" style="animation-delay: 300ms;">
+                    Bespoke creative services. From vision to polished reality — in one seamless flow.
+                </p>
+
+                <div class="flex flex-wrap gap-5 pt-4">
+                    <button onclick="showProposalModal()"
+                            class="px-11 py-7 bg-white text-[#1e40af] text-2xl font-semibold rounded-3xl flex items-center gap-x-4 hover:scale-110 active:scale-95 shadow-2xl pulse-glow">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        Get a Proposal
+                    </button>
+
+                    <button onclick="showAppointmentModal()"
+                            class="px-11 py-7 border-4 border-white/80 text-white text-2xl font-semibold rounded-3xl flex items-center gap-x-4 hover:bg-white hover:text-[#1e40af]">
+                        <i class="fa-solid fa-clock"></i>
+                        Schedule Call
+                    </button>
+                </div>
+            </div>
+
+            <!-- Enhanced visual with floating elements -->
+            <div class="relative hidden md:block">
+                <div class="w-[420px] h-[420px] bg-white/10 backdrop-blur-3xl rounded-[5rem] border border-white/40 flex items-center justify-center rotate-[8deg] hover:rotate-0 transition-all duration-700 shadow-2xl">
+                    <div class="text-center scale-110">
+                        <div class="text-[9rem] mb-4 animate-bounce">🎨</div>
+                        <div class="text-7xl heading-font tracking-tighter">360°</div>
+                        <p class="text-2xl text-blue-100">Elite Creative</p>
+                    </div>
+                </div>
+
+                <!-- Floating service badges with individual delays -->
+                <div class="absolute -top-8 -left-12 bg-white text-[#1e40af] text-sm font-bold px-8 py-4 rounded-3xl shadow-2xl animate-on-scroll" style="animation-delay: 600ms;">LOGO DESIGN</div>
+                <div class="absolute -bottom-10 right-8 bg-white text-[#1e40af] text-sm font-bold px-8 py-4 rounded-3xl shadow-2xl animate-on-scroll" style="animation-delay: 900ms;">MOBILE APP</div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-16 left-1/2 flex flex-col items-center text-white/60 text-xs tracking-[3px]">
+            SCROLL TO DISCOVER
+            <i class="fa-solid fa-chevron-down animate-bounce mt-3 text-xl"></i>
+        </div>
+    </section>
+
+    <!-- ABOUT US with scroll animations -->
+    <section id="about" class="py-28 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-20 items-center">
+                <div class="md:col-span-7 space-y-8">
+                    <span class="uppercase tracking-[3px] text-[#1e40af] text-sm font-bold">ABOUT COEDELL</span>
+                    <h2 class="text-5xl md:text-6xl heading-font leading-none animate-on-scroll">Where Strategy Meets Execution.</h2>
+
+                    <div class="prose prose-xl text-gray-700 space-y-8 animate-on-scroll" style="animation-delay: 200ms;">
+                        <p>I believe great work is building a bridge between vision and reality. I operate at the intersection of creativity and precision.</p>
+                        <p>This platform removes traditional hiring friction — explore services and book time instantly.</p>
+                        <div class="border-l-4 border-[#1e40af] pl-8 italic text-2xl">
+                            Mission: Deliver world-class expertise with personal attention only a dedicated freelancer can offer.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-5 bg-gradient-to-br from-gray-50 to-white rounded-3xl p-12 shadow-inner animate-on-scroll" style="animation-delay: 400ms;">
+                    <div class="grid grid-cols-2 gap-10 text-center">
+                        <div class="space-y-2">
+                            <div class="text-7xl font-semibold text-[#1e40af]" id="stat1">50</div>
+                            <p class="text-gray-500">+ Projects</p>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="text-7xl font-semibold text-[#1e40af]" id="stat2">100</div>
+                            <p class="text-gray-500">% Satisfaction</p>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="text-7xl font-semibold text-[#1e40af]" id="stat3">24</div>
+                            <p class="text-gray-500">hr Response</p>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="text-7xl font-semibold text-[#1e40af]">∞</div>
+                            <p class="text-gray-500">Creative Freedom</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES with staggered cards -->
+    <section id="services" class="py-28 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="px-6 py-2.5 bg-white rounded-3xl text-sm font-semibold text-[#1e40af]">SERVICES</span>
+                <h2 class="text-5xl heading-font mt-6 animate-on-scroll">Tailored Creative Solutions</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div onclick="showProposalModal()" class="service-card bg-white p-10 rounded-3xl border border-transparent hover:border-blue-200 cursor-pointer group" style="animation-delay: 100ms;">
+                    <i class="fa-solid fa-palette service-icon text-6xl text-[#1e40af] mb-8"></i>
+                    <h3 class="text-3xl font-semibold mb-4">Logo Design</h3>
+                    <p class="text-gray-600">Memorable identities that tell your story.</p>
+                </div>
+
+                <div onclick="showProposalModal()" class="service-card bg-white p-10 rounded-3xl border border-transparent hover:border-blue-200 cursor-pointer group" style="animation-delay: 250ms;">
+                    <i class="fa-solid fa-laptop-code service-icon text-6xl text-[#1e40af] mb-8"></i>
+                    <h3 class="text-3xl font-semibold mb-4">Website Design &amp; Dev</h3>
+                    <p class="text-gray-600">Fast, beautiful, conversion-focused sites.</p>
+                </div>
+
+                <div onclick="showProposalModal()" class="service-card bg-white p-10 rounded-3xl border border-transparent hover:border-blue-200 cursor-pointer group" style="animation-delay: 400ms;">
+                    <i class="fa-solid fa-magnifying-glass-chart service-icon text-6xl text-[#1e40af] mb-8"></i>
+                    <h3 class="text-3xl font-semibold mb-4">SEO &amp; Marketing</h3>
+                    <p class="text-gray-600">Grow visibility with smart strategies.</p>
+                </div>
+
+                <div onclick="showProposalModal()" class="service-card bg-white p-10 rounded-3xl border border-transparent hover:border-blue-200 cursor-pointer group" style="animation-delay: 150ms;">
+                    <i class="fa-solid fa-mobile-screen-button service-icon text-6xl text-[#1e40af] mb-8"></i>
+                    <h3 class="text-3xl font-semibold mb-4">Mobile App Design</h3>
+                    <p class="text-gray-600">Intuitive apps users will love.</p>
+                </div>
+
+                <div onclick="showProposalModal()" class="service-card bg-white p-10 rounded-3xl border border-transparent hover:border-blue-200 cursor-pointer group" style="animation-delay: 300ms;">
+                    <i class="fa-solid fa-cart-shopping service-icon text-6xl text-[#1e40af] mb-8"></i>
+                    <h3 class="text-3xl font-semibold mb-4">Ecommerce Solutions</h3>
+                    <p class="text-gray-600">Stores built to sell.</p>
+                </div>
+
+                <div onclick="showProposalModal()" class="service-card bg-white p-10 rounded-3xl border border-transparent hover:border-blue-200 cursor-pointer group" style="animation-delay: 450ms;">
+                    <i class="fa-solid fa-gamepad service-icon text-6xl text-[#1e40af] mb-8"></i>
+                    <h3 class="text-3xl font-semibold mb-4">Game Development</h3>
+                    <p class="text-gray-600">Engaging interactive experiences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO with shine + hover effects -->
+    <section id="portfolio" class="py-28 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between mb-16">
+                <div>
+                    <span class="uppercase text-[#1e40af] tracking-widest text-sm font-bold">PORTFOLIO</span>
+                    <h2 class="text-5xl heading-font">Featured Projects</h2>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="portfolio-card group rounded-3xl overflow-hidden shadow-lg cursor-pointer" onclick="showProposalModal()">
+                    <div class="h-80 bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-9xl relative">
+                        📱
+                    </div>
+                    <div class="p-8 bg-white">
+                        <h4 class="font-semibold text-2xl">Fintech Mobile App</h4>
+                        <p class="text-gray-500">UI/UX • Branding • 2025</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-card group rounded-3xl overflow-hidden shadow-lg cursor-pointer" onclick="showProposalModal()">
+                    <div class="h-80 bg-gradient-to-br from-emerald-500 to-cyan-600 flex items-center justify-center text-9xl relative">
+                        🛍️
+                    </div>
+                    <div class="p-8 bg-white">
+                        <h4 class="font-semibold text-2xl">Ecommerce Platform</h4>
+                        <p class="text-gray-500">Development • SEO Optimization</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-card group rounded-3xl overflow-hidden shadow-lg cursor-pointer" onclick="showProposalModal()">
+                    <div class="h-80 bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center text-9xl relative">
+                        🎮
+                    </div>
+                    <div class="p-8 bg-white">
+                        <h4 class="font-semibold text-2xl">2D Action Game</h4>
+                        <p class="text-gray-500">Full Development Cycle</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT with form enhancements -->
+    <section id="contact" class="py-28 bg-[#1e40af] text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-12 gap-20">
+                <div class="lg:col-span-5">
+                    <h2 class="text-5xl heading-font leading-tight">Let's Create Something Extraordinary</h2>
+                    <p class="mt-10 text-blue-100 text-xl">Your project deserves precision and passion. Reach out today.</p>
+                </div>
+
+                <div class="lg:col-span-7 bg-white/10 backdrop-blur-2xl rounded-3xl p-12">
+                    <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-8">
+                        <!-- Form fields with focus animations remain similar but enhanced border glow -->
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <input type="text" id="name" placeholder="Your Name" required
+                                   class="bg-white/10 border border-white/30 focus:border-white rounded-3xl px-7 py-6 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/50">
+                            <input type="text" id="company" placeholder="Company"
+                                   class="bg-white/10 border border-white/30 focus:border-white rounded-3xl px-7 py-6 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/50">
+                        </div>
+                        <input type="email" id="email" placeholder="Email Address" required
+                               class="bg-white/10 border border-white/30 focus:border-white rounded-3xl px-7 py-6 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 w-full">
+                        <textarea id="message" rows="6" placeholder="Describe your project..." required
+                                  class="bg-white/10 border border-white/30 focus:border-white rounded-3xl px-7 py-6 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 w-full"></textarea>
+
+                        <button type="submit"
+                                class="w-full py-8 bg-white text-[#1e40af] rounded-3xl text-xl font-semibold flex items-center justify-center gap-x-4 hover:scale-[1.02]">
+                            SEND TO COEDELL <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-950 text-white py-20">
+        <div class="max-w-7xl mx-auto px-6 text-center md:text-left">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="flex items-center gap-x-4">
+                    <svg width="52" height="52" viewBox="0 0 68 68" fill="none">
+                        <circle cx="34" cy="34" r="32" stroke="#fff" stroke-width="4"/>
+                        <circle cx="34" cy="34" r="24" fill="#1e40af"/>
+                    </svg>
+                    <span class="text-3xl heading-font">360 Elite Design</span>
+                </div>
+                <p class="text-gray-400">© 2026 360 Elite Design • Karachi, Pakistan • Worldwide Remote</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals (same as before with enhanced animation) -->
+    <div id="proposal-modal" class="hidden fixed inset-0 bg-black/80 z-[9999] flex items-center justify-center">
+        <div onclick="event.stopImmediatePropagation()" class="modal bg-white rounded-3xl max-w-md w-full mx-5 p-10">
+            <h3 class="text-4xl heading-font">Request Proposal</h3>
+            <form onsubmit="handleProposalSubmit(event)" class="mt-10 space-y-7">
+                <input type="text" id="proposal-name" placeholder="Name" required class="w-full rounded-2xl border px-6 py-5">
+                <input type="email" id="proposal-email" placeholder="Email" required class="w-full rounded-2xl border px-6 py-5">
+                <textarea id="proposal-message" rows="4" placeholder="Project details..." required class="w-full rounded-3xl border px-6 py-5"></textarea>
+                <button type="submit" class="w-full py-7 bg-[#1e40af] text-white rounded-3xl text-lg font-medium">SEND REQUEST</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="appointment-modal" class="hidden fixed inset-0 bg-black/80 z-[9999] flex items-center justify-center">
+        <div onclick="event.stopImmediatePropagation()" class="modal bg-white rounded-3xl max-w-md w-full mx-5 p-10">
+            <h3 class="text-4xl heading-font">Book a Meeting</h3>
+            <form onsubmit="handleAppointmentSubmit(event)" class="mt-10 space-y-7">
+                <input type="text" id="appt-name" placeholder="Name" required class="w-full rounded-2xl border px-6 py-5">
+                <input type="email" id="appt-email" placeholder="Email" required class="w-full rounded-2xl border px-6 py-5">
+                <input type="date" id="appt-date" required class="w-full rounded-2xl border px-6 py-5">
+                <button type="submit" class="w-full py-7 bg-[#1e40af] text-white rounded-3xl text-lg font-medium">CONFIRM SLOT</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Tailwind config
+        function initTailwind() {
+            tailwind.config = {
+                content: ["**/*.{html,js}"],
+                theme: { extend: {} }
+            };
+        }
+
+        function smoothScrollTo(id) {
+            document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('mobile-icon');
+            menu.classList.toggle('hidden');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-xmark');
+        }
+
+        function showProposalModal() {
+            document.getElementById('proposal-modal').classList.remove('hidden');
+            document.getElementById('proposal-modal').classList.add('flex');
+        }
+
+        function hideProposalModal() {
+            const m = document.getElementById('proposal-modal');
+            m.classList.add('hidden');
+            m.classList.remove('flex');
+        }
+
+        function showAppointmentModal() {
+            document.getElementById('appointment-modal').classList.remove('hidden');
+            document.getElementById('appointment-modal').classList.add('flex');
+        }
+
+        function hideAppointmentModal() {
+            const m = document.getElementById('appointment-modal');
+            m.classList.add('hidden');
+            m.classList.remove('flex');
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            alert("✅ Message sent to coedell34@gmail.com!\nThank you — I'll reply within 24 hours.");
+            e.target.reset();
+        }
+
+        function handleProposalSubmit(e) {
+            e.preventDefault();
+            alert("✅ Proposal request received and forwarded to coedell34@gmail.com.");
+            hideProposalModal();
+            e.target.reset();
+        }
+
+        function handleAppointmentSubmit(e) {
+            e.preventDefault();
+            alert("✅ Meeting request sent to coedell34@gmail.com.\nI'll confirm the slot shortly.");
+            hideAppointmentModal();
+            e.target.reset();
+        }
+
+        // Advanced scroll animations using IntersectionObserver
+        function setupScrollAnimations() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            });
+
+            elements.forEach(el => observer.observe(el));
+        }
+
+        // Counter animation
+        function animateCounters() {
+            const counters = [
+                { el: document.getElementById('stat1'), target: 50, suffix: '+' },
+                { el: document.getElementById('stat2'), target: 100, suffix: '%' },
+                { el: document.getElementById('stat3'), target: 24, suffix: '' }
+            ];
+
+            counters.forEach(({el, target, suffix}) => {
+                let count = 0;
+                const step = Math.ceil(target / 35);
+                const interval = setInterval(() => {
+                    count += step;
+                    if (count >= target) {
+                        count = target;
+                        clearInterval(interval);
+                    }
+                    el.textContent = count + suffix;
+                }, 35);
+            });
+        }
+
+        // Initialize everything
+        window.onload = function() {
+            initTailwind();
+            setupScrollAnimations();
+
+            // Trigger counters when about section visible
+            const aboutObserver = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    animateCounters();
+                    aboutObserver.disconnect();
+                }
+            }, { threshold: 0.6 });
+
+            aboutObserver.observe(document.getElementById('about'));
+
+            console.log('%c🚀 360 Elite Design website loaded with advanced CSS animations (float, shine, stagger, scroll reveal, pulse glow, gradient shift, modal pop, etc.)',
+                        'color:#1e40af; font-family:monospace; font-size:13px;');
+        }
+    </script>
+</body>
+</html>
